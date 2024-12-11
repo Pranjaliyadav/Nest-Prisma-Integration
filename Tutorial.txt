@@ -1,0 +1,40 @@
+npm i -g @nest/cli
+nest new <foldername>
+
+nest g module users - you create module like this
+nest g controller users
+nest g service users
+
+controllers are for handling incoming requests and returning response to client
+purpose is to receive specific requests for application. routing mechanics controls which controller receives which requests
+Providers - can be service, repository, factories, helpers
+can be injected as dependency
+
+ParseIntPipe
+@Delete(':id') //delete /users/:id
+  deleteUser(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.deleteUser(+id);
+  }
+
+  DTO (data transfer object)
+  defines how data will be sent over the network
+  create.dto.ts
+  export class createDto{}
+
+   npm i  @nestjs/mapped-types -D , used PartialType from this to extend Dto for other dto creation
+   npm i class-validator class-transformer @IsEmail, @IsInt etc
+
+   using Neon tech - serverless postgres online
+
+   npm i prisma -Delete
+npx prisma init
+npx prisma migrate dev --name init 
+//migrate, if you put push inplace of dev, you wont be able to keep track of all the actions you took on db, dev stores that. init will be the name --name
+npx prisma generate // when you make soem change in model
+then again migrate command 
+nest g resource employees - prisma related controller service will be created. where we will use prisma commands and neon db for Rest API
+
+CORS
+app.enableCors()
+npm i @nestjs/throttler
+
